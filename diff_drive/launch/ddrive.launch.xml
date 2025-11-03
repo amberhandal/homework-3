@@ -1,0 +1,11 @@
+<!-- Launch the diff_drive world and spawn the robot urdf file-->
+<launch>
+  <arg name="use_gui" default="True" description="Run the gazebo gui" />
+  <gz_server
+      world_sdf_string="ddrive"
+      world_sdf_file="ddrive.world.sdf"
+      create_own_container="True"
+      use_composition="True" />
+
+  <executable cmd="gz sim -g" if="$(var use_gui)" on_exit="shutdown" />
+</launch>
