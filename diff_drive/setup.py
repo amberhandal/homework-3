@@ -21,16 +21,17 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/hook', ['env-hooks/diff_drive.dsv']),
         *recursive_files('share/' + package_name, "models"),
         *recursive_files('share/' + package_name, "worlds"),
         *recursive_files('share/' + package_name, "launch")
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='amberhandal',
+    maintainer='Amber Handal',
     maintainer_email='ambahjh@gmail.com',
     description='TODO: Package description',
-    license='Apache-2.0',
+    license='GPLv3',
     extras_require={
         'test': [
             'pytest',
