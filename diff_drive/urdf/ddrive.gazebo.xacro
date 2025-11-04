@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot name="ddrive_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="frictionless" params="link">
+    <gazebo reference="${link}">
+      <mu1>0.0</mu1>
+      <mu2>0.0</mu2>
+      <kp>1e5</kp>
+      <kd>1.0</kd>
+      <max_vel>0.2</max_vel>
+      <min_depth>0.001</min_depth>
+      <slip1>1.0</slip1>
+      <slip2>1.0</slip2>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:frictionless link="caster_bottom"/>
+  <xacro:frictionless link="caster_top"/>
+
+  <gazebo reference="base_link"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="wheel_left"><material>Gazebo/Black</material></gazebo>
+  <gazebo reference="wheel_right"><material>Gazebo/Black</material></gazebo>
+  <gazebo reference="caster_bottom"><material>Gazebo/Gray</material></gazebo>
+  <gazebo reference="caster_top"><material>Gazebo/Gray</material></gazebo>
+</robot>

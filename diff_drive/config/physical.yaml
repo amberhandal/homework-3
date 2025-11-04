@@ -1,0 +1,19 @@
+ddrive:
+  ros__parameters:
+    base:
+      x: 0.40
+      y: 0.30
+      z: 0.12
+      mass: 6.0
+    wheel:
+      radius: 0.1
+      width: 0.035
+      mass: 0.7
+      x_front: 0.12
+      y_sep: 0.12
+      z_axle: 0.0
+    caster:
+      radius: 0.05
+      mass: 0.10
+      x_rear: -0.14
+      z_clear: -0.06
