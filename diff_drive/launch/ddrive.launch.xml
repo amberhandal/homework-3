@@ -7,5 +7,20 @@
       create_own_container="True"
       use_composition="True" />
 
+  <gz_spawn_model
+    world=""
+    file=""
+    model_string="$(command '$(exec-in-pkg xacro xacro) $(find-pkg-share diff_drive)/urdf/ddrive.urdf.xacro')"
+    topic=""
+    entity_name=""
+    allow_renaming="False"
+    x="0.0" y="0.0" z="0.10" roll="" pitch="" yaw=""/>
+
+ <ros_gz_bridge
+      use_composition="True"
+      bridge_name="bridge"
+      config_file="$(find-pkg-share diff_drive)/launch/bridge.yaml"/>
+
   <executable cmd="gz sim -g" if="$(var use_gui)" on_exit="shutdown" />
+  <include file="$(find-pkg-share diff_drive)/launch/ddrive_rviz.launch.xml"/>
 </launch>

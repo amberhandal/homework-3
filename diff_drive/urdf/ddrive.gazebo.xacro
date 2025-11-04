@@ -5,8 +5,6 @@
     <gazebo reference="${link}">
       <mu1>0.0</mu1>
       <mu2>0.0</mu2>
-      <slip1>1.0</slip1>
-      <slip2>1.0</slip2>
       <kp>1e5</kp>
       <kd>1.0</kd>
       <max_vel>0.2</max_vel>

@@ -1,10 +1,9 @@
 <launch>
   <arg name="view_only" default="false" description="If true, also launch joint_state_publisher_gui"/>
-  <arg name="gazebo" default="false" description="Include Gazebo tags in URDF (harmless in RViz)"/>
 
   <node pkg="robot_state_publisher" exec="robot_state_publisher">
     <param name="robot_description"
-           value="$(command '$(exec-in-pkg xacro xacro) $(find-pkg-share diff_drive)/urdf/ddrive.urdf.xacro gazebo:=$(var gazebo)')" />
+           value="$(command '$(exec-in-pkg xacro xacro) $(find-pkg-share diff_drive)/urdf/ddrive.urdf.xacro')" />
   </node>
 
   <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui"
