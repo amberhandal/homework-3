@@ -12,7 +12,7 @@
     file=""
     model_string="$(command '$(exec-in-pkg xacro xacro) $(find-pkg-share diff_drive)/urdf/ddrive.urdf.xacro')"
     topic=""
-    entity_name=""
+    entity_name="ddrive"
     allow_renaming="False"
     x="0.0" y="0.0" z="0.10" roll="" pitch="" yaw=""/>
 

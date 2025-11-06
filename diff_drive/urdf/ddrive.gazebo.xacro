@@ -1,14 +1,10 @@
 <?xml version="1.0"?>
-<robot name="ddrive_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="ddrive" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:macro name="frictionless" params="link">
     <gazebo reference="${link}">
       <mu1>0.0</mu1>
       <mu2>0.0</mu2>
-      <kp>1e5</kp>
-      <kd>1.0</kd>
-      <max_vel>0.2</max_vel>
-      <min_depth>0.001</min_depth>
     </gazebo>
   </xacro:macro>
 
@@ -22,7 +18,7 @@
   <gazebo reference="caster_top"><material>Gazebo/Gray</material></gazebo>
 
   <gazebo>
-    <plugin name="diff_drive" filename="gz-sim-diff-drive-system">
+    <plugin name="gz::sim::systems::DiffDrive" filename="gz-sim-diff-drive-system">
       <left_joint>wheel_left_joint</left_joint>
       <right_joint>wheel_right_joint</right_joint>
 
@@ -32,16 +28,13 @@
       <cmd_vel_topic>/model/ddrive/cmd_vel</cmd_vel_topic>
       <odom_topic>/model/ddrive/odometry</odom_topic>
 
-      <odom_frame>odom</odom_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-
-      <publish_odom>true</publish_odom>
-      <odom_publisher_period>0.01</odom_publisher_period>
-      <velocity_publisher_period>0.01</velocity_publisher_period>
-      <max_linear_acceleration>2.5</max_linear_acceleration>
-      <max_angular_acceleration>6.0</max_angular_acceleration>
-      <use_velocity_commands>true</use_velocity_commands>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
     </plugin>
+    <plugin name="gz::sim::systems::JointStatePublisher" filename="gz-sim-joint-state-publisher-system">
+        <joint>wheel_left_joint</joint>
+        <joint>wheel_right_joint</joint>
+    </plugin> 
   </gazebo>
 
 </robot>
