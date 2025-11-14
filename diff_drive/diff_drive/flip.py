@@ -53,9 +53,11 @@ class Flip(Node):
         now = self.get_clock().now()
         elapsed = (now - self.last_flip_time).nanoseconds * 1e-9
 
+        # ---------------- Begin_Citation [1] ----------------
         if elapsed >= self.flip_interval:
             self.direction *= -1.0
             self.last_flip_time = now
+        # ---------------- End_Citation [1] ----------------
 
         # Publish velocity
         cmd = Twist()
