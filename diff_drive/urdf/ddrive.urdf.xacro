@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<robot name="ddrive" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="gazebo" default="true"/>
+
+  <xacro:property name="cfg" value="${xacro.load_yaml('$(find diff_drive)/config/physical.yaml')}"/>
+  <xacro:property name="base_x" value="${cfg['ddrive']['ros__parameters']['base']['x']}"/>
+  <xacro:property name="base_y" value="${cfg['ddrive']['ros__parameters']['base']['y']}"/>
+  <xacro:property name="base_z" value="${cfg['ddrive']['ros__parameters']['base']['z']}"/>
+  <xacro:property name="base_m" value="${cfg['ddrive']['ros__parameters']['base']['mass']}"/>
+
+  <xacro:property name="wh_r" value="${cfg['ddrive']['ros__parameters']['wheel']['radius']}"/>
+  <xacro:property name="wh_w" value="${cfg['ddrive']['ros__parameters']['wheel']['width']}"/>
+  <xacro:property name="wh_m" value="${cfg['ddrive']['ros__parameters']['wheel']['mass']}"/>
+  <xacro:property name="wh_x" value="${cfg['ddrive']['ros__parameters']['wheel']['x_front']}"/>
+  <xacro:property name="wh_y" value="${0.5*base_y + 0.5*wh_w}"/>
+  <xacro:property name="wh_z" value="${cfg['ddrive']['ros__parameters']['wheel']['z_axle']}"/>
+
+  <xacro:property name="cs_r" value="${cfg['ddrive']['ros__parameters']['caster']['radius']}"/>
+  <xacro:property name="cs_m" value="${cfg['ddrive']['ros__parameters']['caster']['mass']}"/>
+  <xacro:property name="cs_x" value="${cfg['ddrive']['ros__parameters']['caster']['x_rear']}"/>
+  <xacro:property name="cs_z" value="${cfg['ddrive']['ros__parameters']['caster']['z_clear']}"/>
+
+  <xacro:macro name="inertial_box" params="mass x y z">
+    <inertial>
+      <mass value="${mass}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${mass*(y*y + z*z)/12.0}"
+               ixy="0.0"
+               ixz="0.0"
+               iyy="${mass*(x*x + z*z)/12.0}"
+               iyz="0.0"
+               izz="${mass*(x*x + y*y)/12.0}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_cyl_y" params="mass r l">
+    <inertial>
+      <mass value="${mass}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${mass*(3*r*r + l*l)/12.0}"
+               ixy="0.0"
+               ixz="0.0"
+               iyy="${0.5*mass*r*r}"
+               iyz="0.0"
+               izz="${mass*(3*r*r + l*l)/12.0}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="inertial_sphere" params="mass r">
+    <inertial>
+      <mass value="${mass}"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="${0.4*mass*r*r}"
+               ixy="0.0"
+               ixz="0.0"
+               iyy="${0.4*mass*r*r}"
+               iyz="0.0"
+               izz="${0.4*mass*r*r}"/>
+    </inertial>
+  </xacro:macro>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="${base_x} ${base_y} ${base_z}"/></geometry>
+      <material name="blue"><color rgba="0.1 0.3 0.8 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="${base_x} ${base_y} ${base_z}"/></geometry>
+    </collision>
+    <xacro:inertial_box mass="${base_m}" x="${base_x}" y="${base_y}" z="${base_z}"/>
+  </link>
+
+  <link name="wheel_left">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry><cylinder radius="${wh_r}" length="${wh_w}"/></geometry>
+      <material name="black"><color rgba="0 0 0 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry><cylinder radius="${wh_r}" length="${wh_w}"/></geometry>
+    </collision>
+    <xacro:inertial_cyl_y mass="${wh_m}" r="${wh_r}" l="${wh_w}"/>
+  </link>
+
+  <joint name="wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_left"/>
+    <origin xyz="${wh_x} ${wh_y} ${wh_z}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <link name="wheel_right">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry><cylinder radius="${wh_r}" length="${wh_w}"/></geometry>
+      <material name="black"><color rgba="0 0 0 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <geometry><cylinder radius="${wh_r}" length="${wh_w}"/></geometry>
+    </collision>
+    <xacro:inertial_cyl_y mass="${wh_m}" r="${wh_r}" l="${wh_w}"/>
+  </link>
+
+  <joint name="wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_right"/>
+    <origin xyz="${wh_x} ${-wh_y} ${wh_z}" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <link name="caster_bottom">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><sphere radius="${cs_r}"/></geometry>
+      <material name="gray"><color rgba="0.6 0.6 0.6 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><sphere radius="${cs_r}"/></geometry>
+    </collision>
+    <xacro:inertial_sphere mass="${cs_m}" r="${cs_r}"/>
+  </link>
+
+  <joint name="caster_bottom_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_bottom"/>
+    <origin xyz="${cs_x} 0 ${cs_z}" rpy="0 0 0"/>
+  </joint>
+
+  <link name="caster_top">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><sphere radius="${cs_r}"/></geometry>
+      <material name="gray"><color rgba="0.6 0.6 0.6 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><sphere radius="${cs_r}"/></geometry>
+    </collision>
+    <xacro:inertial_sphere mass="${cs_m}" r="${cs_r}"/>
+  </link>
+
+  <joint name="caster_top_fixed" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_top"/>
+    <origin xyz="${cs_x} 0 ${-cs_z}" rpy="0 0 0"/>
+  </joint>
+
+  <xacro:if value="$(arg gazebo)">
+    <xacro:include filename="$(find diff_drive)/urdf/ddrive.gazebo.xacro"/>
+  </xacro:if>
+
+</robot>

@@ -1,0 +1,461 @@
+<sdf version='1.12'>
+  <world name='ddrive'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='casual_female'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='box'>
+          <pose>0 0 0.90000000000000002 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.76000000000000001 0.33000000000000002 1.77</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 0.02 0.040000000000000001 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>file:///home/amber-handal/.gz/fuel/fuel.gazebosim.org/openrobotics/models/casual female/4/meshes/casual_female.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-2.4700601100921631 -2.1735000610351562 0 0 0 -2.8704471513051546</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='asphalt_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.10000000000000001</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/asphalt plane/3/files/materials/scripts</uri>
+              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/asphalt plane/3/files/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-0.23063600063323975 -0.019285114482045174 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='Toilet'>
+      <static>true</static>
+      <link name='base_link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/amber-handal/.gz/fuel/fuel.gazebosim.org/openrobotics/models/standard toilet/1/meshes/toilet.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <diffuse>1 1 1 1</diffuse>
+            <specular>1 1 1 1</specular>
+            <pbr>
+              <metal>
+                <albedo_map>materials/textures/Toilet_Albedo.png</albedo_map>
+                <normal_map>materials/textures/Toilet_Normal.png</normal_map>
+                <roughness_map>materials/textures/Toilet_Roughness.png</roughness_map>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+        <collision name='Box001'>
+          <pose>0 1.16967 0.38881300000000002 0 0 -1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.042544400000000003 1.5233399999999999 0.77762699999999996</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <collision name='Box002'>
+          <pose>0 -0.026477299999999999 0.14386099999999999 0 0 -1.5708</pose>
+          <geometry>
+            <box>
+              <size>2.3552599999999999 1.5538099999999999 0.28772199999999998</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <collision name='Box003'>
+          <pose>-0.0040103400000000003 0.89721099999999998 0.48107699999999998 1.5707999999999998 0.45678700000000022 -1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.60728000000000004 0.471611 1.4825600000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <collision name='Box004'>
+          <pose>0.12347900000000001 0.36016999999999999 0.26419399999999998 1.5708 -0.12501899999999999 -1.5708</pose>
+          <geometry>
+            <box>
+              <size>0.60728000000000004 0.471611 1.9947900000000001</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <collision name='Box005'>
+          <pose>0.16376499999999999 -0.52116799999999996 0.27616200000000002 0 0 -1.5708</pose>
+          <geometry>
+            <box>
+              <size>1.3895999999999999 2.0484399999999998 0.39970299999999997</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-2.8571298122406006 0.2883949875831604 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='cardboard_box'>
+      <pose>1.1972555811769112 -1.655088853068599 0.14999999999999999 0 0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.041666666999999998</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.056666666999999997</iyy>
+            <iyz>0</iyz>
+            <izz>0.068333332999999996</izz>
+          </inertia>
+          <pose>0 0 0 0 0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.40000000000000002 0.29999999999999999</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.10000000000000001</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.14999999999999999 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.2593189600000001 1.0074551679999999 0.75559137600000004</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='cardboard_box_0'>
+      <pose>-5.2403202056884766 -4.9886674880981445 0.15000000596046448 0 0 0</pose>
+      <link name='link'>
+        <inertial>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.041666666999999998</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.056666666999999997</iyy>
+            <iyz>0</iyz>
+            <izz>0.068333332999999996</izz>
+          </inertia>
+          <pose>0 0 0 0 0 0</pose>
+        </inertial>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>0.5 0.40000000000000002 0.29999999999999999</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000000</kp>
+                <kd>1</kd>
+                <min_depth>0.001</min_depth>
+                <max_vel>0.10000000000000001</max_vel>
+              </ode>
+            </contact>
+            <bounce/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 0 -0.14999999999999999 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>https://fuel.gazebosim.org/1.0/openrobotics/models/cardboard box/3/files/meshes/cardboard_box.dae</uri>
+              <scale>1.2593189600000001 1.0074551679999999 0.75559137600000004</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='jersey_barrier'>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/amber-handal/ws-hw3/src/homework-3/diff_drive/models/jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/amber-handal/ws-hw3/src/homework-3/diff_drive/models/jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>-2.2305631114518842 -6.8668036869523288 0 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <model name='jersey_barrier_1'>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/amber-handal/ws-hw3/src/homework-3/diff_drive/models/jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>file:///home/amber-handal/ws-hw3/src/homework-3/diff_drive/models/jersey_barrier/meshes/jersey_barrier.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+      <pose>2.0689600852811392 2.6209201627402319 0 0 0 0</pose>
+      <static>false</static>
+      <self_collide>false</self_collide>
+    </model>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.0099999997764825821</linear>
+        <constant>0.89999997615814209</constant>
+        <quadratic>0.0010000000474974513</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf>
